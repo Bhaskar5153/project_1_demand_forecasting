@@ -1,0 +1,138 @@
+project:
+  name: "Demand Forecasting"
+  version: "1.0.0"
+  description: "A machine learning project for forecasting demand based on historical data."
+  author: "Bhaskar"
+
+
+# GCP and bucket configuration
+gcp:
+  project_id: "Your project id"
+  location: "us-central1"
+  bucket_name: "Your bucket name"
+  service_account_key_path: "path/to/your/service_account_key.json"
+  raw_data_path: "gs://Your bucket name/raw_data/"
+  processed_data_path: "gs://Your bucket name/processed_data/"
+  model_path: "gs://Your bucket name/models/"
+
+
+
+data:
+  source: "gs://Your bucket name/raw_data/demand_data.csv"
+  target: "gs://Your bucket name/processed_data/demand_data_processed.parquet"
+
+  date_column: "Date"
+  date_format: "%d-%m-%Y"
+
+  id_columns: 
+    - "Store_ID"
+    - "Product_ID"
+
+  categorical_features:
+    - Category
+    - Region
+    - Weather Condition
+    - Seasonality
+
+  binary_features:
+    - Holiday/Promotion
+
+  numerical_features:
+    - Inventory Level
+    - Price
+    - Discount
+    - Competitor Pricing
+
+  helper_columns:
+    - Units Sold
+    - Units Ordered
+
+  target_variable: Demand Forecast
+
+  train_test_split:
+    test_size: 0.2
+    val_size: 0.1
+    shuffle: True
+
+
+
+
+model:
+  type: XGBoost
+  hyperparameters:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+
+
+training:
+  batch_size: 32
+  epochs: 50
+  early_stopping:
+    enabled: True
+    patience: 5
+    monitor: "val_loss"
+
+
+hyperparameter_tuning:
+  enabled: True
+  run_both: True
+  selection_metric: r2
+  cv: 5
+
+  grid_search:
+    enabled: True
+    param_grid:
+      n_estimators: [100, 200]
+      max_depth: [6, 10]
+      learning_rate: [0.1, 0.01]
+      subsample: [0.8, 1.0]
+      colsample_bytree: [0.8, 1.0]
+
+  random_search:
+    enabled: True
+    param_distributions:
+      n_estimators: [100, 200, 300]
+      max_depth: [6, 10, 12]
+      learning_rate: [0.1, 0.01, 0.001]
+      subsample: [0.8, 1.0]
+      colsample_bytree: [0.8, 1.0]
+      min_child_weight: [1, 5, 10]
+      gamma: [0, 0.1, 0.5]
+
+  random_state: 42
+
+
+evaluation:
+  metrics:
+    - r2
+    - mae
+    - mse
+    - rmse
+
+  evaluation_data_path: "gs://Your bucket name/processed_data/demand_forecasting_evaluation.parquet"
+  evaluation_report_path: "gs://Your bucket name/evaluation_reports/demand_forecasting_evaluation_report.json"
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+    
+
+
+
