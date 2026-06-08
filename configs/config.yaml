@@ -7,19 +7,19 @@ project:
 
 # GCP and bucket configuration
 gcp:
-  project_id: "Your project id"
+  project_id: "ai-ml-solutions-492011"
   location: "us-central1"
-  bucket_name: "Your bucket name"
+  bucket_name: "machine_learning_datasets"
   service_account_key_path: "path/to/your/service_account_key.json"
-  raw_data_path: "gs://Your bucket name/raw_data/"
-  processed_data_path: "gs://Your bucket name/processed_data/"
-  model_path: "gs://Your bucket name/models/"
+  raw_data_path: "gs://machine_learning_datasets/raw_data/"
+  processed_data_path: "gs://machine_learning_datasets/demand_forecast_processed_data/"
+  model_path: "gs://machine_learning_datasets/models/"
 
 
 
 data:
-  source: "gs://Your bucket name/raw_data/demand_data.csv"
-  target: "gs://Your bucket name/processed_data/demand_data_processed.parquet"
+  source: "gs:///raw_data/demand_data.csv"
+  target: "gs://machine_learning_datasets/demand_forecast_processed_data/supply_chain_features_final.parquet"
 
   date_column: "Date"
   date_format: "%d-%m-%Y"

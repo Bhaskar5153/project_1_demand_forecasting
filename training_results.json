@@ -1,0 +1,28 @@
+{
+    "base_model_metrics": {
+        "MAE": 7.667209074810806,
+        "MSE": 79.0167435813478,
+        "RMSE": 8.889136267452974,
+        "R2": 0.99353204973511
+    },
+    "tuned_val_metrics": {
+        "MAE": 7.634671775345115,
+        "MSE": 78.90087448011175,
+        "RMSE": 8.882616420858875,
+        "R2": 0.9935415342513033
+    },
+    "test_metrics": {
+        "MAE": 7.63638738161827,
+        "MSE": 78.48218745958202,
+        "RMSE": 8.859017296494121,
+        "R2": 0.9933136352539161
+    },
+    "best_params": {
+        "colsample_bytree": 1.0,
+        "learning_rate": 0.1,
+        "max_depth": 6,
+        "n_estimators": 100,
+        "subsample": 1.0
+    },
+    "model_uri": "gs://machine_learning_datasets/models/xgboost_model.json"
+}
